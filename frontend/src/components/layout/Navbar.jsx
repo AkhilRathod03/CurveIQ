@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { ThemeContext } from '../../context/ThemeContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { FaSearch, FaBell, FaMoon, FaSun, FaPlus, FaCalendarAlt, FaRobot, FaLayerGroup, FaBook, FaFileAlt, FaUniversity, FaChevronDown, FaExclamationTriangle, FaCheckCircle } from 'react-icons/fa';
+import { FaSearch, FaBell, FaMoon, FaSun, FaPlus, FaCalendarAlt, FaRobot, FaLayerGroup, FaBook, FaFileAlt, FaUniversity, FaChevronDown, FaExclamationTriangle, FaCheckCircle, FaBars } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = ({ isCollapsed }) => {
+const Navbar = ({ isCollapsed, isMobile, mobileOpen, setMobileOpen }) => {
     const { user, logout } = useContext(AuthContext);
     const { darkMode, toggleDarkMode } = useContext(ThemeContext);
     const [searchQuery, setSearchQuery] = useState('');
@@ -103,14 +103,25 @@ const Navbar = ({ isCollapsed }) => {
             }}
         >
             <div className="container-fluid p-0 d-flex align-items-center">
-                {/* Project Name (Replaces wide search bar) */}
+                {/* Mobile Menu Hamburger Button */}
+                {isMobile && (
+                    <button 
+                        onClick={() => setMobileOpen && setMobileOpen(!mobileOpen)}
+                        className={`btn me-2 p-2 border-0 rounded-circle ${darkMode ? 'text-white hover-bg-dark' : 'text-dark hover-bg-light'}`}
+                        aria-label="Toggle navigation drawer"
+                    >
+                        <FaBars size={20} />
+                    </button>
+                )}
+
+                {/* Project Name */}
                 <div className="d-flex align-items-center gap-2">
                     <img 
                         src="/curveiq_logo.png" 
                         alt="CurveIQ Logo" 
                         style={{ 
-                            width: isCollapsed ? '110px' : '100px', 
-                            height: isCollapsed ? '74px' : '67px', 
+                            width: isMobile ? '45px' : (isCollapsed ? '110px' : '100px'), 
+                            height: isMobile ? '40px' : (isCollapsed ? '74px' : '67px'), 
                             objectFit: 'contain',
                             border: 'none',
                             outline: 'none',
@@ -119,7 +130,7 @@ const Navbar = ({ isCollapsed }) => {
                             transition: 'all 0.3s ease'
                         }}
                     />
-                    <span className={`fw-bold ${isCollapsed ? 'fs-3' : 'fs-4'} ${darkMode ? 'text-white' : 'text-dark'} transition-all`} style={{ letterSpacing: isCollapsed ? '-0.5px' : '-0.2px', transition: 'all 0.3s ease' }}>
+                    <span className={`fw-bold ${isMobile ? 'fs-5' : (isCollapsed ? 'fs-3' : 'fs-4')} ${darkMode ? 'text-white' : 'text-dark'} transition-all`} style={{ letterSpacing: isCollapsed ? '-0.5px' : '-0.2px', transition: 'all 0.3s ease' }}>
                         Curve<span className="text-primary">IQ</span> <span className="text-muted d-none d-md-inline" style={{ fontWeight: 500, fontSize: '0.95rem', marginLeft: '8px' }}>| Curriculum Intelligence</span>
                     </span>
                     <span className="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-10 rounded-pill ms-2 d-none d-xl-inline-block" style={{ fontSize: isCollapsed ? '0.75rem' : '0.65rem' }}>v2.0</span>

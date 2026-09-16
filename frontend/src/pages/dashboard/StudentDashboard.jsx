@@ -179,7 +179,7 @@ const StudentDashboard = () => {
                     { label: 'Credits', val: '18', icon: <FaAward />, color: '#333333', trend: '+3', path: '/courses' },
                     { label: 'Study Streak', val: '12 Days', icon: <FaClock />, color: '#ec4899', trend: 'Fire', path: '/schedule' },
                 ].map((s, i) => (
-                    <motion.div key={i} className="col-6 col-md-4 col-xl-2" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: i * 0.05 }}>
+                    <motion.div key={i} className="col-12 col-sm-6 col-md-4 col-xl-2" initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: i * 0.05 }}>
                         <div className="card-modern p-3 h-100 border-0 glass shadow-sm hover-lift cursor-pointer" onClick={() => navigate(s.path)}>
                             <div className="d-flex align-items-center justify-content-between mb-3">
                                 <div className="p-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center" style={{ backgroundColor: `${s.color}15`, color: s.color, width: '40px', height: '40px' }}>

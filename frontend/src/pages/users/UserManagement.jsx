@@ -117,12 +117,12 @@ const UserManagement = () => {
             <PremiumCard className="border-0 shadow-lg p-0 overflow-hidden">
                 {/* Table Toolbar */}
                 <div className={`p-4 border-bottom d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-4 ${darkMode ? 'bg-dark bg-opacity-20 border-secondary' : 'bg-light bg-opacity-30'}`}>
-                    <div className={`d-flex gap-2 p-1 border rounded-pill shadow-sm max-w-fit ${darkMode ? 'bg-dark border-secondary' : 'bg-white'}`}>
+                    <div className={`d-flex gap-1 gap-md-2 p-1 border rounded-pill shadow-sm max-w-fit overflow-x-auto custom-scrollbar w-100 w-md-auto ${darkMode ? 'bg-dark border-secondary' : 'bg-white'}`}>
                         {['all', 'admin', 'teacher', 'student'].map(tab => (
                             <button 
                                 key={tab}
                                 onClick={() => setActiveTab(tab)}
-                                className={`btn btn-sm rounded-pill px-4 py-2 fw-bold text-uppercase transition-all ${activeTab === tab ? 'btn-primary shadow-primary-glow' : `btn-link ${darkMode ? 'text-white-50' : 'text-muted'} text-decoration-none`}`}
+                                className={`btn btn-sm rounded-pill px-3 px-md-4 py-2 fw-bold text-uppercase transition-all text-nowrap ${activeTab === tab ? 'btn-primary shadow-primary-glow' : `btn-link ${darkMode ? 'text-white-50' : 'text-muted'} text-decoration-none`}`}
                                 style={{ fontSize: '0.65rem', letterSpacing: '0.5px' }}
                             >
                                 {tab}s
@@ -130,7 +130,7 @@ const UserManagement = () => {
                         ))}
                     </div>
 
-                    <div className={`input-group glass rounded-pill border shadow-sm ${darkMode ? 'border-secondary' : ''}`} style={{ maxWidth: '350px' }}>
+                    <div className={`input-group glass rounded-pill border shadow-sm w-100 ${darkMode ? 'border-secondary' : ''}`} style={{ maxWidth: '350px' }}>
                         <span className="input-group-text bg-transparent border-0 text-muted ps-3"><FaSearch size={14} /></span>
                         <input 
                             type="text" 
@@ -143,7 +143,7 @@ const UserManagement = () => {
                 </div>
 
                 {/* Data Table */}
-                <div className="table-responsive">
+                <div className="table-responsive table-responsive-custom">
                     <table className={`table table-hover align-middle mb-0 custom-enterprise-table ${darkMode ? 'table-dark' : ''}`}>
                         <thead className={`${darkMode ? 'bg-dark bg-opacity-40' : 'bg-light bg-opacity-50'}`}>
                             <tr>

@@ -11,7 +11,7 @@ import {
 } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
+const Sidebar = ({ isCollapsed, setIsCollapsed, isMobile, mobileOpen, setMobileOpen }) => {
     const { user, logout } = useContext(AuthContext);
     const { darkMode } = useContext(ThemeContext);
 
@@ -70,11 +70,12 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     <NavLink 
                         key={item.name} 
                         to={item.path} 
-                        className={`nav-link-modern ${isCollapsed ? 'd-flex justify-content-center px-0' : ''}`}
-                        title={isCollapsed ? item.name : ''}
+                        onClick={() => { if (isMobile && setMobileOpen) setMobileOpen(false); }}
+                        className={`nav-link-modern ${(isCollapsed && !isMobile) ? 'd-flex justify-content-center px-0' : ''}`}
+                        title={(isCollapsed && !isMobile) ? item.name : ''}
                     >
-                        <span className={`${isCollapsed ? 'me-0' : 'me-3'} d-flex align-items-center opacity-80`} style={{ fontSize: '1.35rem' }}>{item.icon}</span>
-                        {!isCollapsed && <span className="fw-semibold" style={{ fontSize: '0.95rem' }}>{item.name}</span>}
+                        <span className={`${(isCollapsed && !isMobile) ? 'me-0' : 'me-3'} d-flex align-items-center opacity-80`} style={{ fontSize: '1.35rem' }}>{item.icon}</span>
+                        {(!isCollapsed || isMobile) && <span className="fw-semibold" style={{ fontSize: '0.95rem' }}>{item.name}</span>}
                     </NavLink>
                 ))}
             </div>
@@ -83,7 +84,11 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
     return (
         <motion.div 
-            animate={{ width: isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)' }}
+            animate={
+                isMobile 
+                    ? { x: mobileOpen ? '0%' : '-100%', width: 'var(--sidebar-width)' }
+                    : { x: '0%', width: isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)' }
+            }
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
             className={`shadow-sm d-flex flex-column h-100 position-fixed top-0 left-0`} 
             style={{ 
@@ -92,8 +97,21 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                 zIndex: 1050 // Higher than Navbar (1030)
             }}
         >
-            {/* Logo Section Removed (Redundant with Navbar) */}
-            <div className="p-3"></div>
+            {/* Logo Section / Drawer Header */}
+            <div className="p-3 d-flex align-items-center justify-content-between border-bottom border-light border-opacity-10">
+                <div className="d-flex align-items-center gap-2">
+                    <img src="/curveiq_logo.png" alt="CurveIQ" style={{ height: '36px', objectFit: 'contain' }} />
+                    <span className={`fw-bold ${darkMode ? 'text-white' : 'text-dark'}`}>Curve<span className="text-primary">IQ</span></span>
+                </div>
+                {isMobile && (
+                    <button 
+                        onClick={() => setMobileOpen && setMobileOpen(false)} 
+                        className="btn btn-sm btn-icon border-0 text-muted fs-5 p-0"
+                    >
+                        ✕
+                    </button>
+                )}
+            </div>
 
             {/* Menu Sections */}
             <div className={`flex-grow-1 overflow-x-hidden overflow-y-auto py-2 custom-scrollbar`}>
@@ -107,30 +125,32 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             <div className={`mt-auto ps-0 pe-0 py-3 border-top ${darkMode ? 'border-secondary' : 'border-light'} border-opacity-50 d-flex flex-column align-items-center`}>
                 <button 
                     onClick={logout} 
-                    className={`nav-link-modern border-0 bg-transparent text-danger mb-0 hover-bg-danger-subtle ${isCollapsed ? 'w-auto px-0 d-flex justify-content-center' : 'w-100 px-2'}`}
-                    title={isCollapsed ? 'Logout' : ''}
+                    className={`nav-link-modern border-0 bg-transparent text-danger mb-0 hover-bg-danger-subtle ${(isCollapsed && !isMobile) ? 'w-auto px-0 d-flex justify-content-center' : 'w-100 px-2'}`}
+                    title={(isCollapsed && !isMobile) ? 'Logout' : ''}
                 >
-                    <span className={`${isCollapsed ? 'me-0' : 'me-3'} d-flex align-items-center`} style={{ fontSize: '1.35rem' }}><FaSignOutAlt /></span>
-                    {!isCollapsed && <span className="fw-bold" style={{ fontSize: '0.95rem' }}>Terminate Session</span>}
+                    <span className={`${(isCollapsed && !isMobile) ? 'me-0' : 'me-3'} d-flex align-items-center`} style={{ fontSize: '1.35rem' }}><FaSignOutAlt /></span>
+                    {(!isCollapsed || isMobile) && <span className="fw-bold" style={{ fontSize: '0.95rem' }}>Terminate Session</span>}
                 </button>
             </div>
             
-            {/* Toggle Button */}
-            <button 
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                className={`btn btn-sm border shadow-lg rounded-circle position-absolute d-flex align-items-center justify-content-center transition-all ${darkMode ? 'bg-dark text-white border-secondary' : 'bg-white'}`}
-                style={{ 
-                    top: 'calc(var(--navbar-height) / 2)', 
-                    transform: 'translateY(-50%)',
-                    right: '-16px', 
-                    width: '32px', 
-                    height: '32px',
-                    zIndex: 1100,
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
-                }}
-            >
-                {isCollapsed ? <FaChevronRight size={12} /> : <FaChevronLeft size={12} />}
-            </button>
+            {/* Desktop Toggle Button */}
+            {!isMobile && (
+                <button 
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    className={`btn btn-sm border shadow-lg rounded-circle position-absolute d-flex align-items-center justify-content-center transition-all ${darkMode ? 'bg-dark text-white border-secondary' : 'bg-white'}`}
+                    style={{ 
+                        top: 'calc(var(--navbar-height) / 2)', 
+                        transform: 'translateY(-50%)',
+                        right: '-16px', 
+                        width: '32px', 
+                        height: '32px',
+                        zIndex: 1100,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.15)'
+                    }}
+                >
+                    {isCollapsed ? <FaChevronRight size={12} /> : <FaChevronLeft size={12} />}
+                </button>
+            )}
         </motion.div>
     );
 };

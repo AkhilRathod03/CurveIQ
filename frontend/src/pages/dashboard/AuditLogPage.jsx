@@ -53,7 +53,7 @@ const AuditLogPage = () => {
             />
 
             <PremiumCard className="border-0 shadow-lg p-0 overflow-hidden">
-                <div className="table-responsive">
+                <div className="table-responsive table-responsive-custom">
                     <table className={`table table-hover align-middle mb-0 custom-enterprise-table ${darkMode ? 'table-dark' : ''}`}>
                         <thead className={`${darkMode ? 'bg-dark bg-opacity-40' : 'bg-light bg-opacity-50'}`}>
                             <tr>

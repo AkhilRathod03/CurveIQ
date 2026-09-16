@@ -195,7 +195,7 @@ const TeacherDashboard = () => {
                     { label: 'Attendance', val: '94%', icon: <FaUserTie />, color: '#1a1a1a', trend: 'Stable', path: '/attendance' },
                     { label: 'Live Classes', val: '3', icon: <FaClock />, color: '#ec4899', trend: 'Active', path: '/schedule' },
                 ].map((s, i) => (
-                    <motion.div key={i} className="col-6 col-md-4 col-xl-2" variants={itemVariants}>
+                    <motion.div key={i} className="col-12 col-sm-6 col-md-4 col-xl-2" variants={itemVariants}>
                         <div className="card-modern p-3 h-100 border-0 glass shadow-sm hover-lift cursor-pointer" onClick={() => navigate(s.path)}>
                             <div className="d-flex align-items-center justify-content-between mb-3">
                                 <div className="p-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center" style={{ backgroundColor: `${s.color}15`, color: s.color, width: '40px', height: '40px' }}>

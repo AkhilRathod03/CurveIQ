@@ -33,9 +33,9 @@ const PageHeader = ({ title, subtitle, breadcrumbs = [], actions = [], aiInsight
                     <p className="text-secondary mb-0 fw-medium opacity-75">{subtitle}</p>
                 </motion.div>
 
-                <div className="d-flex flex-wrap align-items-center gap-2">
+                <div className="d-flex flex-wrap align-items-center gap-2 w-100 w-md-auto page-header-actions">
                     {aiInsight && (
-                        <button className="btn btn-premium bg-ai-gradient text-white border-0 shadow-sm me-2">
+                        <button className="btn btn-premium bg-ai-gradient text-white border-0 shadow-sm me-0 me-md-2 w-100 w-sm-auto">
                             <FaRobot className="me-2" /> AI Insights
                         </button>
                     )}
@@ -43,7 +43,7 @@ const PageHeader = ({ title, subtitle, breadcrumbs = [], actions = [], aiInsight
                         <button 
                             key={index}
                             onClick={action.onClick}
-                            className={`btn ${action.variant === 'primary' ? 'btn-primary-premium' : 'btn-white'} d-flex align-items-center justify-content-center gap-2 px-4 shadow-sm`}
+                            className={`btn ${action.variant === 'primary' ? 'btn-primary-premium' : 'btn-white'} d-flex align-items-center justify-content-center gap-2 px-3 px-md-4 shadow-sm flex-grow-1 flex-md-grow-0`}
                         >
                             <span className="d-flex align-items-center justify-content-center" style={{ marginTop: '1px' }}>{action.icon}</span>
                             <span>{action.label}</span>

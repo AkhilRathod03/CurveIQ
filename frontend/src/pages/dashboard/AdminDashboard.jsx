@@ -225,7 +225,7 @@ const AdminDashboard = () => {
                     { label: 'Audit Desk', val: stats.pendingApprovals, icon: <FaUserShield />, color: '#ef4444', path: '/users', trend: '-2' },
                     { label: 'Performance', val: `${stats.overallCompletion}%`, icon: <FaChartLine />, color: '#333333', path: '/curriculum', trend: '+5.1%' },
                 ].map((s, i) => (
-                    <motion.div key={i} className="col-6 col-md-4 col-xl-2" variants={itemVariants}>
+                    <motion.div key={i} className="col-12 col-sm-6 col-md-4 col-xl-2" variants={itemVariants}>
                         <div className="card-modern p-3 h-100 border-0 glass shadow-sm hover-lift cursor-pointer" onClick={() => navigate(s.path)}>
                             <div className="d-flex align-items-center justify-content-between mb-3">
                                 <div className="p-2 rounded-3 shadow-sm d-flex align-items-center justify-content-center" style={{ backgroundColor: `${s.color}15`, color: s.color, width: '40px', height: '40px' }}>

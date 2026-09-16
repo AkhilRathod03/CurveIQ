@@ -30,8 +30,8 @@
   --text-muted: #94a3b8;
   
   /* Sizing & Spacing (Compact Enterprise) */
-  --sidebar-width: 230px;
-  --sidebar-collapsed-width: 75px;
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 85px;
   --navbar-height: 75px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -418,13 +418,13 @@ a:hover {
 .nav-link-modern {
   display: flex;
   align-items: center;
-  padding: 0.65rem 1rem;
-  margin: 0.15rem 0.75rem;
+  padding: 0.75rem 1.15rem;
+  margin: 0.2rem 0.85rem;
   color: var(--text-secondary);
   text-decoration: none;
   border-radius: 8px;
   font-weight: 500;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   transition: var(--transition);
 }
 

@@ -108,11 +108,14 @@ const Navbar = ({ isCollapsed }) => {
                     <img 
                         src="/curveiq_logo.png" 
                         alt="CurveIQ Logo" 
-                        className="rounded-3 shadow-sm" 
                         style={{ 
                             width: isCollapsed ? '110px' : '100px', 
                             height: isCollapsed ? '74px' : '67px', 
-                            objectFit: 'contain', 
+                            objectFit: 'contain',
+                            border: 'none',
+                            outline: 'none',
+                            boxShadow: 'none',
+                            background: 'transparent',
                             transition: 'all 0.3s ease'
                         }}
                     />
@@ -211,10 +214,6 @@ const Navbar = ({ isCollapsed }) => {
                                 )}
                             </AnimatePresence>
                         </div>
-                        
-                        <button className="btn btn-icon rounded-circle hover-light" onClick={toggleDarkMode}>
-                            {darkMode ? <FaSun className="text-warning" size={16} /> : <FaMoon className="text-muted" size={16} />}
-                        </button>
                     </div>
 
                     {/* User Profile Dropdown */}

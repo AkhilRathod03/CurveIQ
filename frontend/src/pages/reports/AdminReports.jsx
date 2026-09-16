@@ -11,7 +11,7 @@ import {
     AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, 
     ResponsiveContainer, BarChart, Bar, Legend, Cell
 } from 'recharts';
-import axios from 'axios';
+import axiosInstance from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 
 const AdminReports = () => {
@@ -28,10 +28,7 @@ const AdminReports = () => {
     const fetchReportData = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:8000/api/reports/admin/', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await axiosInstance.get('reports/admin/');
             setReportData(response.data);
         } catch (error) {
             console.error("Error fetching admin reports:", error);

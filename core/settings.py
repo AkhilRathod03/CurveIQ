@@ -10,7 +10,7 @@ environ.Env.read_env(BASE_DIR / '.env')
 
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env.bool('DEBUG', default=False)
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['*'])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -83,12 +83,23 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-# CORS — the React dev server by default, overridable for deployments.
+# CORS — React dev server & CurveIQ domain configurations (local and Vercel)
 CORS_ALLOWED_ORIGINS = env.list('CORS_ALLOWED_ORIGINS', default=[
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://curveiq.local:3000",
+    "http://curveiq.localhost:3000",
+    "https://curveiq.vercel.app",
 ])
+CORS_ALLOW_ALL_ORIGINS = env.bool('CORS_ALLOW_ALL_ORIGINS', default=True)
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://curveiq.local:3000",
+    "http://curveiq.localhost:3000",
+    "https://*.vercel.app",
+])
 
 # Database — PostgreSQL with URL support (Supabase/Render)
 if env('DATABASE_URL', default=None):

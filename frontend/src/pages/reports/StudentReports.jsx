@@ -9,7 +9,7 @@ import {
     Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, 
     ResponsiveContainer, Tooltip as RechartsTooltip
 } from 'recharts';
-import axios from 'axios';
+import axiosInstance from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 
 const StudentReports = () => {
@@ -25,10 +25,7 @@ const StudentReports = () => {
     const fetchReportData = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:8000/api/reports/student/', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await axiosInstance.get('reports/student/');
             setReportData(response.data);
         } catch (error) {
             console.error("Error fetching student reports:", error);
@@ -41,9 +38,7 @@ const StudentReports = () => {
     const handleDownloadReport = async () => {
         try {
             setDownloading(true);
-            const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:8000/api/reports/student/resume/', {
-                headers: { Authorization: `Bearer ${token}` },
+            const response = await axiosInstance.get('reports/student/resume/', {
                 responseType: 'blob'
             });
 

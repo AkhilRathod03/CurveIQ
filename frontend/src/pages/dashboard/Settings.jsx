@@ -59,7 +59,7 @@ const Settings = () => {
                             <label className="form-label small fw-bold text-muted">Email Address</label>
                             <div className="input-group">
                                 <span className={`input-group-text rounded-start-3 ${darkMode ? 'bg-black border-secondary' : 'bg-light'}`}><FaEnvelope className="text-muted" /></span>
-                                <input type="email" className={`form-control rounded-end-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light'}`} defaultValue={user?.email || 'akhil@synycs.com'} />
+                                <input type="email" className={`form-control rounded-end-3 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light'}`} defaultValue={user?.email || 'akhil@curveiq.com'} />
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@ const Settings = () => {
                                 <input 
                                     type={showCurrentPassword ? "text" : "password"} 
                                     className={`form-control rounded-3 pe-5 ${darkMode ? 'bg-black text-white border-secondary' : 'bg-light'}`} 
-                                    defaultValue="synycs@password"
+                                    defaultValue="curveiq@password"
                                     autoComplete="current-password"
                                 />
                                 <button 

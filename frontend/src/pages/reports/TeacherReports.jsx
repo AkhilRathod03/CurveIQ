@@ -9,7 +9,7 @@ import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, 
     ResponsiveContainer, Legend, Cell
 } from 'recharts';
-import axios from 'axios';
+import axiosInstance from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 
 const TeacherReports = () => {
@@ -24,10 +24,7 @@ const TeacherReports = () => {
     const fetchReportData = async () => {
         try {
             setLoading(true);
-            const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:8000/api/reports/teacher/', {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            const response = await axiosInstance.get('reports/teacher/');
             setReportData(response.data);
         } catch (error) {
             console.error("Error fetching teacher reports:", error);

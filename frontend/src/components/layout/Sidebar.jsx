@@ -61,7 +61,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
             <div className="mb-4">
                 <div className="px-4 mb-2">
                     {!isCollapsed && (
-                        <small className="text-uppercase fw-bold text-muted ps-1 d-block" style={{ fontSize: '0.625rem', letterSpacing: '1.5px', opacity: 0.7 }}>
+                        <small className="text-uppercase fw-bold text-muted ps-1 d-block" style={{ fontSize: '0.75rem', letterSpacing: '1.5px', opacity: 0.7 }}>
                             {title}
                         </small>
                     )}
@@ -73,8 +73,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                         className={`nav-link-modern ${isCollapsed ? 'd-flex justify-content-center px-0' : ''}`}
                         title={isCollapsed ? item.name : ''}
                     >
-                        <span className={`${isCollapsed ? 'me-0' : 'me-3'} fs-5 d-flex align-items-center opacity-80`}>{item.icon}</span>
-                        {!isCollapsed && <span className="small fw-semibold">{item.name}</span>}
+                        <span className={`${isCollapsed ? 'me-0' : 'me-3'} d-flex align-items-center opacity-80`} style={{ fontSize: '1.35rem' }}>{item.icon}</span>
+                        {!isCollapsed && <span className="fw-semibold" style={{ fontSize: '0.95rem' }}>{item.name}</span>}
                     </NavLink>
                 ))}
             </div>
@@ -110,8 +110,8 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     className={`nav-link-modern border-0 bg-transparent text-danger mb-0 hover-bg-danger-subtle ${isCollapsed ? 'w-auto px-0 d-flex justify-content-center' : 'w-100 px-2'}`}
                     title={isCollapsed ? 'Logout' : ''}
                 >
-                    <span className={`${isCollapsed ? 'me-0' : 'me-3'} fs-5 d-flex align-items-center`}><FaSignOutAlt /></span>
-                    {!isCollapsed && <span className="small fw-bold">Terminate Session</span>}
+                    <span className={`${isCollapsed ? 'me-0' : 'me-3'} d-flex align-items-center`} style={{ fontSize: '1.35rem' }}><FaSignOutAlt /></span>
+                    {!isCollapsed && <span className="fw-bold" style={{ fontSize: '0.95rem' }}>Terminate Session</span>}
                 </button>
             </div>
             

@@ -16,7 +16,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin, { Draggable } from '@fullcalendar/interaction';
-import axios from 'axios';
+import axiosInstance from '../../api/axiosInstance';
 import PageHeader from '../../components/common/PageHeader';
 import PremiumCard from '../../components/common/PremiumCard';
 
@@ -128,9 +128,7 @@ const SchedulePage = () => {
 
     const handleExportTimetable = async () => {
         try {
-            const token = localStorage.getItem('access_token');
-            const response = await axios.get('http://127.0.0.1:8000/api/curriculum/schedules/export/', {
-                headers: { Authorization: `Bearer ${token}` },
+            const response = await axiosInstance.get('curriculum/schedules/export/', {
                 responseType: 'blob'
             });
 
